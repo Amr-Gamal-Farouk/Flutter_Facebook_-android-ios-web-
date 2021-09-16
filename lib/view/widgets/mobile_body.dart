@@ -2,7 +2,12 @@ import 'package:facebook/models/post_model.dart';
 import 'package:facebook/view/widgets/post_container.dart';
 import 'package:facebook/view/widgets/stories.dart';
 import 'package:facebook/viewmodel/data_sources/local_data.dart';
+import 'package:facebook/viewmodel/posts/cubit.dart';
+import 'package:facebook/viewmodel/posts/state.dart';
+import 'package:facebook/viewmodel/user/cubit.dart';
+import 'package:facebook/viewmodel/user/state.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'create_post_container.dart';
 
@@ -19,6 +24,11 @@ class _MobileBodyState extends State<MobileBody> {
     var mWidth = MediaQuery.of(context).size.width;
     var mHeight = MediaQuery.of(context).size.height;
 
+    return BlocConsumer<UserCubit, UserState>(
+  listener: (context, state) {
+    // TODO: implement listener
+  },
+  builder: (context, uState) {
     return SizedBox(
           width: 550.0,
           child: CustomScrollView(
@@ -27,28 +37,44 @@ class _MobileBodyState extends State<MobileBody> {
             // controller: widget.scrollController,
             slivers: [
               SliverToBoxAdapter(
-                child: CreatePostContainer(currentUser: currentUser),
+                child: CreatePostContainer(currentUser: uState.currentUser),
               ),
-              SliverPadding(
+              BlocConsumer<PostsCubit, PostsState>(
+  listener: (context, state) {
+    // TODO: implement listener
+  },
+  builder: (context, state) {
+    return SliverPadding(
                 padding: const EdgeInsets.fromLTRB(0.0, 20.0, 0.0, 10.0),
                 sliver: SliverToBoxAdapter(
                   child: Stories(
-                    currentUser: currentUser,
-                    stories: stories,
+                    currentUser: uState.currentUser,
+                    stories: state.stories,
                   ),
                 ),
-              ),
-              SliverList(
+              );
+  },
+),
+              BlocConsumer<PostsCubit, PostsState>(
+  listener: (context, state) {
+    // TODO: implement listener
+  },
+  builder: (context, state) {
+    return SliverList(
                 delegate: SliverChildBuilderDelegate(
                       (context, index) {
-                    final Post post = posts[index];
+                    final Post post = state.posts[index];
                     return PostContainer(post: post);
                   },
-                  childCount: posts.length,
+                  childCount: state.posts.length,
                 ),
-              ),
+              );
+  },
+),
             ],
           ),
         );
+  },
+);
   }
 }
