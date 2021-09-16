@@ -199,7 +199,7 @@ final List<Post> posts = [
     shares: 27,
   ),
   Post(
-    user: onlineUsers[4],
+    user: onlineUsers[1],
     caption: 'This is a very good boi.',
     timeAgo: '8hr',
     imageListUrl: [
