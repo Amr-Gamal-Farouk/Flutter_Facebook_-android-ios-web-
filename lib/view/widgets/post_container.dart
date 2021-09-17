@@ -110,6 +110,7 @@ class ImagesView extends StatelessWidget{
                 flex: 1,
                 child: ListView.builder(
                   physics: const NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
                   padding: const EdgeInsets.all(1),
                   itemCount: (post.imageListUrl.length>5)?4:post.imageListUrl.length-1,
                   itemBuilder: (context, index) {
