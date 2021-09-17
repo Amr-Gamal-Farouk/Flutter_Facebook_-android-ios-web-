@@ -5,7 +5,6 @@ import 'package:facebook/view/widgets/create_post_container.dart';
 import 'package:facebook/view/widgets/more_options_list.dart';
 import 'package:facebook/view/widgets/post_container.dart';
 import 'package:facebook/view/widgets/stories.dart';
-import 'package:facebook/viewmodel/data_sources/local_data.dart';
 import 'package:facebook/viewmodel/posts/cubit.dart';
 import 'package:facebook/viewmodel/posts/state.dart';
 import 'package:facebook/viewmodel/user/cubit.dart';
@@ -126,7 +125,7 @@ class _DesktopBodyState extends State<DesktopBody> {
           ),
         ),
         const Spacer(),
-        (mWidth > 800)
+        (mWidth > 930)
             ? Flexible(
                 flex: 2,
                 child: Align(
